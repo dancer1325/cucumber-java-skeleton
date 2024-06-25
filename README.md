@@ -1,85 +1,71 @@
 # Cucumber-Java Skeleton
+* Goal
+  * how to install & run Cucumber!
+    * **Note:** The simplest possible build script setup
 
-This is the simplest possible build script setup for Cucumber using Java.
-There is nothing fancy like a webapp or browser testing. All this does is to show
-you how to install and run Cucumber!
-
-There is a single feature file with one scenario. The scenario has three steps,
-two of them pending. See if you can make them all pass!
-
-## Get the code
-
-Git:
-
-    git clone https://github.com/cucumber/cucumber-java-skeleton.git
-    cd cucumber-java-skeleton
-
-Subversion:
-
-    svn checkout https://github.com/cucumber/cucumber-java-skeleton/trunk cucumber-java-skeleton
-    cd cucumber-java-skeleton
-
-Or [download a zip](https://github.com/cucumber/cucumber-java-skeleton/archive/main.zip) file.
+## Cucumber features
+* 1! feature file / 1! scenario / 3 steps -- Check 'belly.feature' --
 
 ## Use Maven
-
-Open a command window and run:
-
-    cd maven
-    ./mvnw test
-
-This runs Cucumber features using Cucumber's JUnit Platform Engine. The `Suite`
-annotation on the `RunCucumberTest` class tells JUnit to kick off Cucumber.
+* 
+  ```
+  cd maven
+  ./mvnw test
+  ```  
+  * Problems:
+    * Problem1: "[ERROR]   The step 'I wait 1 hour' and 1 other step(s) are undefined."
+      * Solution: Add the missing steps
+  * Cucumber features -- are run via -- Cucumber's JUnit Platform Engine
+  * `RunCucumberTest` class', `Suite` -- tells JUnit to -- kick off Cucumber
 
 ## Use Gradle
+* 
+   ```
+  cd gradle
+  ./gradlew test --rerun-tasks --info
+   ```
+    * Problems:
+      * Problem1: "[ERROR]   The step 'I wait 1 hour' and 1 other step(s) are undefined."
+        * Solution: Add the missing steps
+    * Cucumber features -- are run via -- Cucumber's JUnit Platform Engine
+    * `RunCucumberTest` class', `Suite` -- tells JUnit to -- kick off Cucumber
 
-Open a command window and run:
-
-    cd gradle
-    ./gradlew test --rerun-tasks --info
-
-This runs Cucumber features using Cucumber's JUnit Platform Engine. The `Suite`
-annotation on the `RunCucumberTest` class tells JUnit to kick off Cucumber.
 
 ## Configuration 
-
-The [Cucumber JUnit Platform Engine](https://github.com/cucumber/cucumber-jvm/tree/main/cucumber-junit-platform-engine) uses configuration parameters to know what features to run,
-where the glue code lives, what plugins to use, etc. When using JUnit, these
-configuration parameters are provided through the `@ConfigurationParameter`
-annotation on your test.
-
-For available parameters see: `io.cucumber.junit.platform.engine.Constants`
+* [cucumber-junit-platform-engine](https://github.com/cucumber/cucumber-jvm/tree/main/cucumber-junit-platform-engine)
+  * [configuration parameters](https://github.com/dancer1325/cucumber-jvm/tree/main/cucumber-junit-platform-engine#configuration-options)
+    * allow specifying
+      * what features to run
+      * where the glue code lives
+      * what plugins to use 
+    * if you use JUnit -> `@ConfigurationParameter` is the annotation to       configuration parameters are provided through the
 
 ### Run a subset of Features or Scenarios
+* by *line*
+  ```
+  @SelectClasspathResource(value = "io/cucumber/skeleton/belly.feature", line = 3)
+  ```
 
-Specify a particular scenario by *line*
+* by *tag*:
+  ```
+  @IncludeTags("zucchini")
+  ```
 
-    @SelectClasspathResource(value = "io/cucumber/skeleton/belly.feature", line = 3)
-
-In case you have multiple feature files or scenarios to run against repeat the
-annotation.
-
-You can also specify what to run by *tag*:
-
-    @IncludeTags("zucchini")
-
-## Running a single scenario or feature
-
-Maven and Gradle do not (yet) support selecting single features or scenarios
-with JUnit selectors. As a work around the `cucumber.features` property can be
-used. Because this property will cause Cucumber to ignore any other selectors
-from JUnit it is prudent to only execute the Cucumber engine.
+## Running 1! scenario or feature
+* Via
+  * JUnit selectors
+    * ⚠️ NOT (yet) supported by Maven and Gradle ⚠️
+  * `cucumber.features` property
+    * Recommendations: 👁️only execute the Cucumber engine 👁️
+      * **Reason:** 🧠Cucumber ignores any other selectors from JUnit 🧠
 
 ### With Maven
-
-To select the scenario on line 3 of the `belly.feature` file use:
+* _Example:_ select the scenario on line 3 of the `belly.feature` file
 
 ```
 ./mvnw test -Dsurefire.includeJUnit5Engines=cucumber -Dcucumber.features=src/test/resources/io/cucumber/skeleton/belly.feature:3 
 ```
-
-Note: Add `-Dcucumber.plugin=pretty` to get a more detailed output during test execution.
+* If you want more detailed output during test execution ->  `-Dcucumber.plugin=pretty`
 
 ### With Gradle
-
-TODO: (I don't know how to do this. Feel free to send a pull request. ;))
+* TODO: (I don't know how to do this. Feel free to send a pull request. ;))
