@@ -69,3 +69,10 @@
 
 ### With Gradle
 * TODO: (I don't know how to do this. Feel free to send a pull request. ;))
+
+## Notes
+* 'pom.xml'
+  * `dependencyManagement`
+    * TODO: Why is it needed?
+  * `maven-surefire-plugin.configurationParameters.cucumber.junit-platform.naming-strategy=long`
+    * TODO: Why is it needed?
